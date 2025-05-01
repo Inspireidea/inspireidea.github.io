@@ -185,6 +185,16 @@
     }
     .dietary-option {
       margin-bottom: 8px;
+      font-weight: normal; /* ทำให้ตัวอักษรบาง */
+    }
+    .dietary-legend {
+      font-weight: bold;
+    }
+    .dietary-required {
+      color: red;
+      font-size: 0.9em;
+      margin-left: 5px;
+      font-weight: normal; /* ทำให้ตัวอักษรบาง */
     }
   </style>
 </head>
@@ -217,7 +227,7 @@
     <input type="text" id="lastName" name="lastName" placeholder="Please enter your last name" required>
     
     <label for="company" class="required">Company Name:</label>
-    <input type="text" id="company" name="company" value="Kasikornbank" readonly>
+    <input type="text" id="company" name="company" placeholder="Please enter your company name" value="Kasikornbank" required>
     
     <label for="email" class="required">Work Email:</label>
     <input type="email" id="email" name="email" placeholder="example@company.com" required>
@@ -229,10 +239,10 @@
     <input type="text" id="jobTitle" name="jobTitle" placeholder="Please enter your job title" required>
     
     <fieldset>
-      <legend>Dietary Requirements:</legend>
+      <legend class="dietary-legend required">Dietary Requirements: <span class="dietary-required">(Select only one option)</span></legend>
       
       <label class="dietary-option">
-        <input type="radio" name="dietary" value="None" checked>
+        <input type="radio" name="dietary" value="None">
         No special dietary requirements
       </label>
       
@@ -285,7 +295,6 @@
   </div>
 
   <script>
-    // Updated with your Google Apps Script URL
     const scriptURL = 'https://script.google.com/macros/s/AKfycby-F0npPaLUORtuTu8zygey_FgV02nXgBB0Y8fZtPkLRz_OX9k2H_OoJyJ-HR3Cl-U5/exec';
     const form = document.getElementById('adobeForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -325,6 +334,16 @@
       errorMsg.textContent = '';
       submitBtn.disabled = true;
       submitBtn.textContent = "Submitting...";
+
+      // Validate at least one dietary option is selected
+      const isDietarySelected = Array.from(dietaryRadios).some(radio => radio.checked);
+      
+      if (!isDietarySelected) {
+        errorMsg.textContent = 'Please select one dietary requirement option.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = "COMPLETE REGISTRATION";
+        return;
+      }
 
       try {
         const formData = new FormData(form);
