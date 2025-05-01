@@ -206,9 +206,8 @@
   <!-- Welcome Page -->
   <div id="welcomePage">
     <div class="welcome-content">
-      <h1 class="welcome-title">Kasikornbank Event Registration</h1>
-      <p>Thank you for joining us! Please complete your registration by providing your contact information and dietary preferences to help us prepare for the event.</p>
-      <button id="startFormBtn">BEGIN REGISTRATION</button>
+      <h1 class="welcome-title">Kbank Adobe Day</h1>
+      <button id="startFormBtn">Register Now</button>
     </div>
   </div>
 
@@ -239,11 +238,16 @@
     <input type="text" id="jobTitle" name="jobTitle" placeholder="Please enter your job title" required>
     
     <fieldset>
-      <legend class="dietary-legend required">Dietary Requirements: <span class="dietary-required">(Select only one option)</span></legend>
+      <legend class="dietary-legend required">Do you have any dietary restrictions ? <span class="dietary-required">(Select only one option)</span></legend>
       
       <label class="dietary-option">
-        <input type="radio" name="dietary" value="None">
-        No special dietary requirements
+        <input type="radio" name="dietary" value="No restrictions">
+        No restrictions
+      </label>
+      
+      <label class="dietary-option">
+        <input type="radio" name="dietary" value="No beef">
+        No beef
       </label>
       
       <label class="dietary-option">
@@ -252,26 +256,11 @@
       </label>
       
       <label class="dietary-option">
-        <input type="radio" name="dietary" value="Vegan">
-        Vegan
+        <input type="radio" name="dietary" value="Food allergy">
+        Food allergy, please specify
       </label>
       
-      <label class="dietary-option">
-        <input type="radio" name="dietary" value="Gluten-Free">
-        Gluten-Free
-      </label>
-      
-      <label class="dietary-option">
-        <input type="radio" name="dietary" value="Halal">
-        Halal
-      </label>
-      
-      <label class="dietary-option">
-        <input type="radio" name="dietary" value="Other">
-        Other (please specify)
-      </label>
-      
-      <input type="text" id="otherDietary" name="otherDietary" placeholder="Please specify dietary requirements" style="margin-top: 10px; display: none;">
+      <input type="text" id="otherDietary" name="otherDietary" placeholder="Please specify food allergy" style="margin-top: 10px; display: none;">
     </fieldset>
     
     <div class="privacy">
@@ -322,8 +311,8 @@
     // Show/hide other dietary requirements field
     dietaryRadios.forEach(radio => {
       radio.addEventListener('change', () => {
-        otherDietaryInput.style.display = radio.value === 'Other' ? 'block' : 'none';
-        if (radio.value !== 'Other') {
+        otherDietaryInput.style.display = radio.value === 'Food allergy' ? 'block' : 'none';
+        if (radio.value !== 'Food allergy') {
           otherDietaryInput.value = '';
         }
       });
@@ -355,7 +344,7 @@
           phone: formData.get('phone'),
           jobTitle: formData.get('jobTitle'),
           dietary: formData.get('dietary'),
-          otherDietary: formData.get('dietary') === 'Other' ? formData.get('otherDietary') : ''
+          otherDietary: formData.get('dietary') === 'Food allergy' ? formData.get('otherDietary') : ''
         };
 
         const response = await fetch(scriptURL, {
