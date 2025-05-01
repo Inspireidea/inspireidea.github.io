@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adobe Event Registration</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f8f1f1;
+    }
+    .header {
+      text-align: center;
+      margin: 30px 0;
+      display: none;
+    }
+    .logo {
+      max-width: 180px;
+      height: auto;
+      margin: 20px 0;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: none;
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    #welcomePage {
+      background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('Tension_Fabric_Spider_Banner_page-001.jpg');
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    #thankYouPage {
+      background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('Tension_Fabric_Spider_Banner_page-001.jpg');
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .welcome-content {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+    .thank-you-content {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+    fieldset {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    legend {
+      font-weight: bold;
+      padding: 0 10px;
+    }
+    #startFormBtn {
+      background-color: #ed1c24;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+      min-width: 250px;
+    }
+    button {
+      background-color: #ed1c24;
+      color: white;
+      border: none;
+      padding: 15px 0;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button:hover {
+      background-color: #c2161b;
+    }
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    .privacy {
+      font-size: 12px;
+      margin-top: 20px;
+      color: #666;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .privacy a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .privacy a:hover {
+      text-decoration: underline;
+    }
+    .error {
+      color: #d32f2f;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .required-note {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .required-note:before {
+      content: "* ";
+    }
+    .required:after {
+      content: " *";
+      color: red;
+    }
+    .welcome-title {
+      color: #ed1c24;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+    .thank-you-message {
+      color: #ed1c24;
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .dietary-option {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="Adobe_Logo_Red.png" alt="Adobe Logo" class="logo">
+  </div>
+
+  <!-- Welcome Page -->
+  <div id="welcomePage">
+    <div class="welcome-content">
+      <h1 class="welcome-title">Kasikornbank Event Registration</h1>
+      <p>Thank you for joining us! Please complete your registration by providing your contact information and dietary preferences to help us prepare for the event.</p>
+      <button id="startFormBtn">BEGIN REGISTRATION</button>
+    </div>
+  </div>
+
+  <!-- Form Page (hidden by default) -->
+  <form id="adobeForm">
+    <div class="header">
+      <img src="Adobe_Logo_Red.png" alt="Adobe Logo" class="logo">
+    </div>
+    
+    <p class="required-note">Required</p>
+    
+    <label for="firstName" class="required">First Name:</label>
+    <input type="text" id="firstName" name="firstName" placeholder="Please enter your first name" required>
+    
+    <label for="lastName" class="required">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" placeholder="Please enter your last name" required>
+    
+    <label for="company" class="required">Company Name:</label>
+    <input type="text" id="company" name="company" value="Kasikornbank" readonly>
+    
+    <label for="email" class="required">Work Email:</label>
+    <input type="email" id="email" name="email" placeholder="example@company.com" required>
+    
+    <label for="phone" class="required">Phone:</label>
+    <input type="tel" id="phone" name="phone" placeholder="099-999-9999" required>
+    
+    <label for="jobTitle" class="required">Job Title:</label>
+    <input type="text" id="jobTitle" name="jobTitle" placeholder="Please enter your job title" required>
+    
+    <fieldset>
+      <legend>Dietary Requirements:</legend>
+      
+      <label class="dietary-option">
+        <input type="radio" name="dietary" value="None" checked>
+        No special dietary requirements
+      </label>
+      
+      <label class="dietary-option">
+        <input type="radio" name="dietary" value="Vegetarian">
+        Vegetarian
+      </label>
+      
+      <label class="dietary-option">
+        <input type="radio" name="dietary" value="Vegan">
+        Vegan
+      </label>
+      
+      <label class="dietary-option">
+        <input type="radio" name="dietary" value="Gluten-Free">
+        Gluten-Free
+      </label>
+      
+      <label class="dietary-option">
+        <input type="radio" name="dietary" value="Halal">
+        Halal
+      </label>
+      
+      <label class="dietary-option">
+        <input type="radio" name="dietary" value="Other">
+        Other (please specify)
+      </label>
+      
+      <input type="text" id="otherDietary" name="otherDietary" placeholder="Please specify dietary requirements" style="margin-top: 10px; display: none;">
+    </fieldset>
+    
+    <div class="privacy">
+      <p>
+        By supplying my contact information, I authorize the <a href="https://www.adobe.com/privacy/policy.html#info-share" target="_blank">Adobe family of companies</a> to contact me with <a href="https://www.adobe.com/privacy/marketing.html#mktg-email" target="_blank">personalized</a> communications about Adobe's products and services.  
+        See our <a href="https://www.adobe.com/privacy/policy.html" target="_blank">Privacy Policy</a> for more details or to <a href="https://account.adobe.com/privacy" target="_blank">opt-out</a> at any time.
+      </p>
+    </div>
+    
+    <button type="submit" id="submitBtn">COMPLETE REGISTRATION</button>
+    <div id="errorMsg" class="error"></div>
+  </form>
+
+  <!-- Thank You Page (hidden by default) -->
+  <div id="thankYouPage">
+    <div class="thank-you-content">
+      <div class="thank-you-message">Registration Complete!</div>
+      <p>Thank you for registering for the event. We have received your information including your dietary preferences.</p>
+      <p>We look forward to welcoming you at the event.</p>
+    </div>
+  </div>
+
+  <script>
+    // Updated with your Google Apps Script URL
+    const scriptURL = 'https://script.google.com/macros/s/AKfycby-F0npPaLUORtuTu8zygey_FgV02nXgBB0Y8fZtPkLRz_OX9k2H_OoJyJ-HR3Cl-U5/exec';
+    const form = document.getElementById('adobeForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const welcomePage = document.getElementById('welcomePage');
+    const thankYouPage = document.getElementById('thankYouPage');
+    const startFormBtn = document.getElementById('startFormBtn');
+    const header = document.querySelector('.header');
+    const otherDietaryInput = document.getElementById('otherDietary');
+    const dietaryRadios = document.querySelectorAll('input[name="dietary"]');
+
+    // Show welcome page by default
+    welcomePage.style.display = 'flex';
+    form.style.display = 'none';
+    thankYouPage.style.display = 'none';
+    header.style.display = 'none';
+
+    // Start form button click handler
+    startFormBtn.addEventListener('click', () => {
+      welcomePage.style.display = 'none';
+      form.style.display = 'block';
+      header.style.display = 'block';
+    });
+
+    // Show/hide other dietary requirements field
+    dietaryRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        otherDietaryInput.style.display = radio.value === 'Other' ? 'block' : 'none';
+        if (radio.value !== 'Other') {
+          otherDietaryInput.value = '';
+        }
+      });
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      try {
+        const formData = new FormData(form);
+        const data = {
+          firstName: formData.get('firstName'),
+          lastName: formData.get('lastName'),
+          company: formData.get('company'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          jobTitle: formData.get('jobTitle'),
+          dietary: formData.get('dietary'),
+          otherDietary: formData.get('dietary') === 'Other' ? formData.get('otherDietary') : ''
+        };
+
+        const response = await fetch(scriptURL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        // Show thank you page after successful submission
+        form.style.display = 'none';
+        header.style.display = 'none';
+        thankYouPage.style.display = 'flex';
+
+      } catch (error) {
+        console.error('Error:', error);
+        errorMsg.textContent = 'Error: Please try again or contact support.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "COMPLETE REGISTRATION";
+      }
+    });
+  </script>
+</body>
+</html>
