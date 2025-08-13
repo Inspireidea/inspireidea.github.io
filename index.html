@@ -294,17 +294,6 @@
     const otherDietaryInput = document.getElementById('otherDietary');
     const dietaryRadios = document.querySelectorAll('input[name="dietary"]');
 
-    const phoneInput = document.getElementById('phone');
-    phoneInput.addEventListener('input', function(e) {
-      let value = e.target.value.replace(/\D/g, '');
-      if (value.length > 3 && value.length <= 6) {
-        value = value.replace(/(\d{3})(\d+)/, '$1-$2');
-      } else if (value.length > 6) {
-        value = value.replace(/(\d{3})(\d{3})(\d+)/, '$1-$2-$3');
-      }
-      e.target.value = value;
-    });
-
     // Show welcome page by default
     welcomePage.style.display = 'flex';
     form.style.display = 'none';
